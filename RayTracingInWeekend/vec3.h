@@ -14,7 +14,7 @@ class vec3 {
   // constructors
   // TODO: find out what this constructor type is called again. i fogor
   vec3() : e{0, 0, 0} {}
-  vec3(double e0, double e1, double e2) : e{0, 0, 0} {}
+  vec3(double e0, double e1, double e2) : e{e0, e1, e2} {}
 
   // coordinates
   double x() const;
@@ -36,6 +36,8 @@ class vec3 {
   vec3& operator/=(double t);
 };
 
+using point3 = vec3;  //interesting placement for this alias
+
 // It took me some time to understand why inlining is a thing here
 // Apparently its not lazy, its to tell the compiler "hey. optimize me in
 // particular" which would be important for calcuating hundreds of thousands of
@@ -46,10 +48,6 @@ class vec3 {
 //
 // Apparently the Google C++ style guide says to put inline defs into the header
 // Leaving as is
-
-inline vec3 operator+(const vec3& u, const vec3& v) {
-  return vec3(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]);
-}
 
 inline vec3 operator+(const vec3& u, const vec3& v) {
   return vec3(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]);
@@ -83,4 +81,8 @@ inline vec3 cross(const vec3& u, const vec3& v) {
 
 inline vec3 unit_vector(const vec3& v) { return v / v.length(); }
 
+// Prints in order: x y z
+inline std::ostream& operator<<(std::ostream& out, const vec3& v) {
+  return out << v.e[0] << " " << v.e[1] << " " << v.e[2];
+}
 #endif  // VEC3_H_
