@@ -2,10 +2,18 @@
 // execution begins and ends there.
 //
 
+//Format
+// image_width
+
 #include <iostream>
+#include <fstream>
 
+int main(int argc, char *argv[]) { 
 
-int main() { 
+  if (!(argc == 2)) {
+    
+  }
+
   int image_width = 256;
   int image_height = 256;
 
@@ -14,7 +22,7 @@ int main() {
   for (int j = 0; j < image_height; j++) {
     for (int i = 0; i < image_height; i++) {
       auto r = double(i) / (image_width - 1);
-      auto g = double(i) / (image_height - 1);
+      auto g = double(j) / (image_height - 1);
       auto b = 0.0;
 
       int ir = int(255.999 * r);
